@@ -1,18 +1,12 @@
 # AWS API Gateway CDK
 
-Repositório de Infrastructure as Code para API Gateway HTTP.
+## Integração com Lambda
+Ver repositório: https://github.com/patote85/aws-lambda-api-gateway-python
 
-## Integração com Lambda (outro repositório)
+## Exemplos de Requisições
+(veja README do Lambda repo)
 
-1. Deploy da Lambda primeiro (repo: aws-lambda-api-gateway-python)
-2. Passe o nome da função Lambda como parâmetro
+## Custom Domain e Throttling
+Configurados no CDK.
 
-## Deploy
-```bash
-cdk deploy --parameters LambdaFunctionName=exclusao-cliente-lambda
-```
-
-## Rotas
-- POST /solicitar-exclusao-cliente
-- GET /status-exclusao/{cliente_id}
-- POST /confirmar-pagamento
+Link para Lambda: https://github.com/patote85/aws-lambda-api-gateway-python
