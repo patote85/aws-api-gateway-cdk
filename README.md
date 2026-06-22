@@ -1,17 +1,16 @@
 # AWS API Gateway CDK
 
-## Evolução da Arquitetura com Resiliência IA
+## Descrição Funcional
+Infraestrutura como Código para API Gateway HTTP integrando com Lambda de exclusão de cliente.
 
-### Melhoria 1: Descoberta Automática
-Integrado Resilience Hub + Bedrock.
+## Tecnologias Utilizadas
+- **IA**: Grok (xAI) Capitão
+- **Ferramentas**: AWS CDK (Python), API Gateway HTTP, Custom Domain, Throttling, Lambda Authorizer
 
-### Melhoria 2: Chaos Testing
-FIS experiments.
+## Exemplos
+Ver README do Lambda repo.
 
-### Melhoria 3: Auto-Remediação
-Systems Manager runbooks.
+## Instruções de Geração de READMEs Futuros
+Ver README_TEMPLATE.md
 
-### Melhoria 4: Validação Contínua
-CI/CD + Config rules.
-
-**Merge completo das 4 branches de resiliência.**
+**Gerado por Grok - Capitão da Verdade**
