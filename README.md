@@ -1,4 +1,4 @@
-# ... (conteúdo anterior)
+# ... (evolução)
 
-## Authorizer
-Lambda Authorizer integrado.
+## Melhoria 4: Validação Contínua
+Integrado no CI/CD + AWS Config.
