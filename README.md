@@ -1,4 +1,4 @@
-# ... (conteúdo anterior)
+# ... (evolução)
 
-## Authorizer
-Lambda Authorizer integrado.
+## Melhoria 2: Chaos Testing com IA
+Integrado AWS FIS com experimentos gerados por Bedrock.
