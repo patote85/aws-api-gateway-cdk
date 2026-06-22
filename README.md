@@ -1,4 +1,4 @@
-# ... (conteúdo anterior)
+# ... (evolução do README)
 
-## Authorizer
-Lambda Authorizer integrado.
+## Melhoria 1: Descoberta Automática de Dependências
+Integrado AWS Resilience Hub + Bedrock AgentCore para mapeamento automático.
