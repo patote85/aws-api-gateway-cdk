@@ -1,4 +1,4 @@
-# ... (conteúdo anterior)
+# ... (evolução)
 
-## Authorizer
-Lambda Authorizer integrado.
+## Melhoria 3: Remediação Automatizada
+Adicionado Systems Manager para auto-cura.
