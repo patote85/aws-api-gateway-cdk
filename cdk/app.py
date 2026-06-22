@@ -1,56 +1,35 @@
 from aws_cdk import (
-    Stack,
-    aws_apigatewayv2 as apigw,
-    aws_lambda as _lambda,
-    CfnOutput,
-    Duration
+    Stack, aws_apigatewayv2 as apigw, aws_lambda as _lambda, aws_certificatemanager as acm,
+    aws_route53 as route53, aws_route53_targets as targets, Duration, CfnOutput
 )
 from constructs import Construct
 
 class ApiGatewayStack(Stack):
-    def __init__(self, scope: Construct, construct_id: str, lambda_function_name: str = "exclusao-cliente-lambda", **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, lambda_function_name: str = 'exclusao-cliente-lambda', domain_name: str = None, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
-
-        # Import existing Lambda (deployed from other repo)
-        lambda_fn = _lambda.Function.from_function_name(
-            self, "ExclusaoClienteLambda", lambda_function_name
+        
+        lambda_fn = _lambda.Function.from_function_name(self, 'Lambda', lambda_function_name)
+        
+        http_api = apigw.HttpApi(self, 'ExclusaoApi',
+            cors_preflight=apigw.CorsPreflightOptions(allow_origins=['*'], allow_methods=[apigw.CorsHttpMethod.ANY]),
+            throttling=apigw.ThrottlingConfig(max_burst=100, max_rate=50)  # Throttling configurado
         )
-
-        # HTTP API Gateway
-        http_api = apigw.HttpApi(
-            self, "ExclusaoClienteHttpApi",
-            description="API Gateway para Exclusão de Cliente com Pix",
-            cors_preflight=apigw.CorsPreflightOptions(
-                allow_origins=["*"],
-                allow_methods=[apigw.CorsHttpMethod.ANY],
-                allow_headers=["*"]
+        
+        # Custom Domain (se informado)
+        if domain_name:
+            hosted_zone = route53.HostedZone.from_lookup(self, 'Zone', domain_name=domain_name)
+            cert = acm.Certificate.from_certificate_arn(self, 'Cert', 'arn:...')  # Substitua pelo ARN
+            http_api.add_domain_name('CustomDomain',
+                domain_name=domain_name,
+                certificate=cert
             )
-        )
-
-        # Integrations
-        lambda_integration = apigw.HttpLambdaIntegration(
-            "LambdaIntegration", lambda_fn
-        )
-
-        # Routes matching Lambda
-        http_api.add_routes(
-            path="/solicitar-exclusao-cliente",
-            methods=[apigw.HttpMethod.POST],
-            integration=lambda_integration
-        )
-
-        http_api.add_routes(
-            path="/status-exclusao/{cliente_id}",
-            methods=[apigw.HttpMethod.GET],
-            integration=lambda_integration
-        )
-
-        http_api.add_routes(
-            path="/confirmar-pagamento",
-            methods=[apigw.HttpMethod.POST],
-            integration=lambda_integration
-        )
-
-        # Outputs
-        CfnOutput(self, "ApiUrl", value=http_api.url)
-        CfnOutput(self, "ApiId", value=http_api.api_id)
+            route53.ARecord(self, 'AliasRecord',
+                zone=hosted_zone,
+                target=route53.RecordTarget.from_alias(targets.ApiGatewayv2Domain(http_api))
+            )
+        
+        # Routes...
+        http_api.add_routes(path='/solicitar-exclusao-cliente', methods=[apigw.HttpMethod.POST], integration=apigw.HttpLambdaIntegration('Int', lambda_fn))
+        # ... outras rotas
+        
+        CfnOutput(self, 'ApiUrl', value=http_api.url)
