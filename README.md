@@ -1,7 +1,15 @@
 # AWS API Gateway CDK
 
-**Status**: Main atualizada e integrada com Lambda repo.
+## Integração
+Lambda Repo: https://github.com/patote85/aws-lambda-api-gateway-python
 
-Ver Lambda: https://github.com/patote85/aws-lambda-api-gateway-python
+## Funcionalidades
+- HTTP API com rotas integradas
+- Custom Domain
+- Throttling (50 req/s)
+- CI/CD
 
-Custom domain e throttling configurados.
+## Deploy
+cdk deploy
+
+**Main atualizada com todos os ajustes.**
