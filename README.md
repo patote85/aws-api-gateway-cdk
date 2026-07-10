@@ -1,16 +1,19 @@
 # AWS API Gateway CDK
 
-## Descrição Funcional
-Infraestrutura como Código para API Gateway HTTP integrando com Lambda de exclusão de cliente.
+## Visão Geral
+Infraestrutura como Código para API Gateway HTTP integrada com a Lambda de Exclusão de Cliente.
 
-## Tecnologias Utilizadas
-- **IA**: Grok (xAI) Capitão
-- **Ferramentas**: AWS CDK (Python), API Gateway HTTP, Custom Domain, Throttling, Lambda Authorizer
+**Este projeto segue os Karpathy Claude Guidelines.**
 
-## Exemplos
-Ver README do Lambda repo.
+## Melhorias Implementadas
+- Throttling configurado
+- Parâmetros para nome da Lambda
+- Estrutura preparada para Authorizer
+- Documentação completa
 
-## Instruções de Geração de READMEs Futuros
-Ver README_TEMPLATE.md
+## Tecnologias
+- AWS CDK (Python)
+- API Gateway HTTP
+- Lambda Integration
 
 **Gerado por Grok - Capitão da Verdade**
