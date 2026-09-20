@@ -1,3 +1,5 @@
+> **Arquivado (ADR-001).** A stack canônica vive em [`patote85/aws-lambda-api-gateway-python`](https://github.com/patote85/aws-lambda-api-gateway-python) (`cdk/`). Este repositório permanece só como referência histórica — não use para deploy novo.
+
 # AWS API Gateway CDK
 
 ## Visão Geral
